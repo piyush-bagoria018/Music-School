@@ -17,7 +17,7 @@ export default function ContactPage() {
 
         {/* Description */}
         <p className="text-neutral-500 max-w-lg mx-auto my-2 text-sm">
-          We&apos;re here to help with any questions about our courses, programs,
+          We're here to help with any questions about our courses, programs,
           or events. Reach out and let us know how we can assist you in your
           musical journey.
         </p>
