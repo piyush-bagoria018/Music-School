@@ -4,7 +4,6 @@ import * as Yup from "yup";
 import toast, { Toaster } from "react-hot-toast";
 
 const ContactForm = () => {
-  // Step 1: Define validation rules using Yup
   const validationSchema = Yup.object({
     name: Yup.string()
       .min(3, "Name must be at least 3 characters")
@@ -17,25 +16,41 @@ const ContactForm = () => {
       .required("Message is required"),
   });
 
+  const handleSubmit = async (values: { name: string; email: string; message: string }, { resetForm }: any) => {
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (response.ok) {
+        toast.success("🎉 Message sent successfully!");
+        resetForm();
+      } else {
+        const errorData = await response.json();
+        toast.error(errorData.error || "Failed to send message.");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error("An unexpected error occurred.");
+    }
+  };
+
   return (
     <>
-       {/* Custom Toast Notifications */}
-       <Toaster
+      <Toaster
         position="top-right"
         toastOptions={{
-          duration: 5000, // ✅ Show toast for 5 seconds
+          duration: 5000,
           style: {
-            background: "#1e293b", // ✅ Custom background (dark gray)
-            color: "#ffffff", // ✅ White text
+            background: "#1e293b",
+            color: "#ffffff",
             padding: "12px",
             borderRadius: "8px",
             fontSize: "16px",
-          },
-          success: {
-            icon: "✅", // ✅ Custom success icon
-          },
-          error: {
-            icon: "❌", // ✅ Custom error icon
           },
         }}
       />
@@ -43,21 +58,10 @@ const ContactForm = () => {
       <Formik
         initialValues={{ name: "", email: "", message: "" }}
         validationSchema={validationSchema}
-        onSubmit={(values, { resetForm }) => {
-          toast.success("🎉 Message sent successfully!", {
-            icon: "📩", // ✅ Custom icon
-            style: {
-              background: "#22c55e", // ✅ Green background
-              color: "white",
-              zIndex: 1000,
-            },
-          });
-          resetForm();
-        }}
+        onSubmit={handleSubmit}
       >
         {({ isSubmitting }) => (
           <Form className="space-y-4 mt-4">
-            {/* Name Field */}
             <div className="mb-4">
               <Field
                 type="text"
@@ -65,14 +69,9 @@ const ContactForm = () => {
                 placeholder="Your Name"
                 className="rounded-lg border border-neutral-800 focus:ring-2 focus:ring-teal-500 w-full p-4 bg-neutral-950 placeholder:text-neutral-700"
               />
-              <ErrorMessage
-                name="name"
-                component="p"
-                className="text-red-500"
-              />
+              <ErrorMessage name="name" component="p" className="text-red-500" />
             </div>
 
-            {/* Email Field */}
             <div className="mb-4">
               <Field
                 type="email"
@@ -80,14 +79,9 @@ const ContactForm = () => {
                 placeholder="Your email address"
                 className="rounded-lg border border-neutral-800 focus:ring-2 focus:ring-teal-500 w-full p-4 bg-neutral-950 placeholder:text-neutral-700"
               />
-              <ErrorMessage
-                name="email"
-                component="p"
-                className="text-red-500"
-              />
+              <ErrorMessage name="email" component="p" className="text-red-500" />
             </div>
 
-            {/* Message Field */}
             <div>
               <Field
                 as="textarea"
@@ -96,14 +90,9 @@ const ContactForm = () => {
                 className="rounded-lg border border-neutral-800 focus:ring-2 focus:ring-teal-500 w-full p-4 bg-neutral-950 placeholder:text-neutral-700"
                 rows={5}
               />
-              <ErrorMessage
-                name="message"
-                component="p"
-                className="text-red-500"
-              />
+              <ErrorMessage name="message" component="p" className="text-red-500" />
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
               className="justify-center text-center items-center px-6 py-2 rounded-lg bg-teal-500 text-white font-medium hover:bg-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
