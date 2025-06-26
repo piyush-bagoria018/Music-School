@@ -5,18 +5,10 @@ import contactRoutes from "./routes/contact.routes.js";
 
 const app = express();
 
-// Support multiple origins for CORS
-const allowedOrigins = process.env.CORS_ORIGIN?.split(',').map(origin => origin.trim());
+// Simplified CORS setup for production
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin) return callback(null, true); // allow non-browser requests
-      if (allowedOrigins && allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      } else {
-        return callback(new Error('Not allowed by CORS'));
-      }
-    },
+    origin: process.env.CORS_ORIGIN,
     credentials: true,
   })
 );
