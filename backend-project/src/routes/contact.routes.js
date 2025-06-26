@@ -3,7 +3,7 @@ import { saveContactMessage } from "../controllers/contactController.js";
 
 const router = express.Router();
 
-// POST /api/v1/contact
-router.post("/", saveContactMessage);
+// POST /api/contact
+router.post("/contact", saveContactMessage);
 
 export default router;
