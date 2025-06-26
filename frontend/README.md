@@ -1,37 +1,71 @@
+# Music School Platform
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+A full-stack, production-ready web application for music schools, built with Next.js, TypeScript, Tailwind CSS (Aceternity UI), and a Node.js/Express/MongoDB backend. The platform enables users to explore music courses, register for webinars, contact instructors, and more.
+
+## Features
+
+- **Modern UI/UX**: Responsive, accessible design using Tailwind CSS and Aceternity UI components.
+- **TypeScript**: Type-safe codebase for maintainability and scalability.
+- **Course Catalog**: Browse all music courses with detailed descriptions and images.
+- **Featured Courses**: Highlighted section for top courses.
+- **Upcoming Webinars**: List of featured and upcoming music webinars.
+- **Instructor Profiles**: Meet the teaching staff with bios and photos.
+- **Testimonials**: Real student feedback with animated cards.
+- **Contact Form**: Secure, validated (Formik + Yup) contact form with backend integration and toast notifications.
+- **Sticky Scroll & Animated Backgrounds**: Engaging UI with sticky scroll sections and animated backgrounds.
+- **Navigation**: Interactive navbar with dropdowns for easy access to all sections.
+- **API Integration**: Connects to a Node.js/Express backend for contact form submissions and data persistence.
+- **Deployment**: Easily deployable on Vercel.
+
+## Tech Stack
+
+- **Frontend**: Next.js, TypeScript, Tailwind CSS, Aceternity UI, Framer Motion, Formik, Yup, React Hot Toast
+- **Backend**: Node.js, Express, MongoDB (Mongoose)
 
 ## Getting Started
 
-First, run the development server:
+1. **Install dependencies:**
+   ```bash
+   npm install
+   # or yarn install
+   ```
+2. **Set environment variables:**
+   - Create a `.env.local` file and set `NEXT_PUBLIC_BACKEND_URL` to your backend API URL.
+3. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
+4. **Open [http://localhost:3000](http://localhost:3000) in your browser.**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Folder Structure
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- `src/app/` – Main app pages (Home, Courses, Contact, etc.)
+- `src/components/` – Reusable UI components (Navbar, Footer, FeatureSection, etc.)
+- `src/data/` – Static data (e.g., music_courses.json)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Key Files
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `src/app/page.tsx` – Home page with hero, features, testimonials, webinars, instructors
+- `src/app/courses/page.tsx` – All courses listing
+- `src/app/contact/page.tsx` – Contact form page
+- `src/components/ContactForm.tsx` – Formik/Yup contact form with toast notifications
+- `src/components/FeatureSection.tsx` – Featured courses
+- `src/components/UpcomingWebinars.tsx` – Webinars section
+- `src/components/Instructors.tsx` – Instructor profiles
+- `src/components/TestimonialCards.tsx` – Student testimonials
 
-## Learn More
+## Backend Integration
 
-To learn more about Next.js, take a look at the following resources:
+- Contact form submits data to `/api/contact` endpoint (Node.js/Express backend)
+- Backend stores messages in MongoDB
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Deploy frontend on Vercel for best performance and CI/CD.
 
-## Deploy on Vercel
+## Credits
+- UI inspired by Aceternity UI and modern web design best practices.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+For backend API and admin features, see the backend README in `/backend-project/README.md`.
