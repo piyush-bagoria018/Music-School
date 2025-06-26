@@ -45,13 +45,16 @@ const ContactForm = () => {
         validationSchema={validationSchema}
         onSubmit={async (values, { resetForm }) => {
           try {
-            const response = await fetch("http://localhost:4000/api/contact", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(values),
-            });
+            const response = await fetch(
+              `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/contact`,
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(values),
+              }
+            );
 
             if (response.ok) {
               toast.success("🎉 Message sent successfully!", {
